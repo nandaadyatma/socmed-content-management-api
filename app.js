@@ -46,6 +46,8 @@ function formatWithIntl(isoString) {
   });
 
 const authRouter = require("./app/api/v1/auth/router");
+const platformRouter = require("./app/api/v1/platform/router")
+const brandRouter = require("./app/api/v1/brand/router")
 
 // app.use(logger("dev"));
 app.use(logger(":timestamp :method :url :status :response-time ms"));
@@ -55,6 +57,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(v1, authRouter);
+app.use(v1, platformRouter);
+app.use(v1, brandRouter);
 
 app.use(notFoundMiddleware);
 app.use(handleErrorMiddleware);
