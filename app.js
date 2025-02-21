@@ -49,6 +49,7 @@ const authRouter = require("./app/api/v1/auth/router");
 const platformRouter = require("./app/api/v1/platform/router")
 const brandRouter = require("./app/api/v1/brand/router")
 const taskRouter = require("./app/api/v1/task/router")
+const paymentRouter = require("./app/api/v1/payment/router")
 
 // app.use(logger("dev"));
 app.use(logger(":timestamp :method :url :status :response-time ms"));
@@ -61,6 +62,7 @@ app.use(v1, authRouter);
 app.use(v1, platformRouter);
 app.use(v1, brandRouter);
 app.use(v1, taskRouter);
+app.use(v1, paymentRouter);
 
 app.use(notFoundMiddleware);
 app.use(handleErrorMiddleware);
