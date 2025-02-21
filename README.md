@@ -11,6 +11,7 @@ API untuk mengelola to-do list pada jasa manajemen konten media sosial. Project 
 DOCS LINK: https://socmed-content-management-api-production.up.railway.app/api-docs/
 
 Deployed LINK: [socmed-content-management-api-production.up.railway.app](https://socmed-content-management-api-production.up.railway.app/)
+
 BASE URL: [socmed-content-management-api-production.up.railway.app](https://socmed-content-management-api-production.up.railway.app/api/v1)
 
 ## Teknologi
