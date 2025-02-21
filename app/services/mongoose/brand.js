@@ -1,6 +1,7 @@
 const { isValidObjectId } = require("mongoose");
 const { Brand } = require("../../api/v1/brand/model");
 const { NotFoundError, BadRequestError } = require("../../errors");
+const { isEmptyOrNull } = require("../../utils/validation");
 
 const createBrand = async (req) => {
   const { name, email, phone } = req.body;
@@ -40,6 +41,10 @@ const getBrandById = async (req) => {
 
   const result = await Brand.find({ _id: id });
 
+  if(isEmptyOrNull(result)) {
+    throw new NotFoundError("Brand not found")
+  }
+
   return result;
 };
 
@@ -75,6 +80,10 @@ const updateBrandData = async (req) => {
     }
   );
 
+  if(isEmptyOrNull(result)) {
+    throw new NotFoundError("Brand not found")
+  }
+
   return result;
 };
 
@@ -88,6 +97,11 @@ const deleteBrandById = async (req) => {
     }
 
     const result = await Brand.findOneAndDelete({ _id: id})
+
+    // is result empty
+    if(isEmptyOrNull(result)) {
+      throw new NotFoundError("Brand not found")
+    }
 
     return result
 }

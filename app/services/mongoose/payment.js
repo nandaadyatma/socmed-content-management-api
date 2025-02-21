@@ -56,8 +56,6 @@ const getPaymentById = async (req) => {
 
   const result = await Payment.find({ _id: id });
 
-  console.log(result)
-
   if (isEmptyOrNull(result)) {
     throw new NotFoundError("Payment is not found");
   }

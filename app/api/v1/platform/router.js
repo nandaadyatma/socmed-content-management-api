@@ -4,8 +4,8 @@ const { authenticateUser, authorizeRoles } = require("../../../middlewares/auth"
 const router = express.Router();
 
 router.post("/platforms", authenticateUser, authorizeRoles("Super admin"), createNewPlatform)
-router.get("/platforms", authenticateUser, fetchAllPlatformData)
-router.get("/platforms/:id", authenticateUser, fetchPlatformDataById)
+router.get("/platforms", authenticateUser, authorizeRoles("Admin", "Super admin"), fetchAllPlatformData)
+router.get("/platforms/:id", authenticateUser, authorizeRoles("Admin", "Super admin"), fetchPlatformDataById)
 router.put("/platforms/:id", authenticateUser, authorizeRoles("Super admin"), editPlatformDataById)
 router.delete("/platforms/:id", authenticateUser, authorizeRoles("Super admin"), removePlatformDatabyId)
 

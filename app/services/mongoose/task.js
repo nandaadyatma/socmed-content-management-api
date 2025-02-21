@@ -1,7 +1,8 @@
 const { isValidObjectId } = require("mongoose");
 const { Task } = require("../../api/v1/task/model");
 const BadRequest = require("../../errors/bad-request");
-const { BadRequestError } = require("../../errors");
+const { BadRequestError, NotFoundError } = require("../../errors");
+const { isEmptyOrNull } = require("../../utils/validation");
 
 const createTask = async (req) => {
   const {
@@ -14,7 +15,6 @@ const createTask = async (req) => {
     isRequiresPayment,
   } = req.body;
 
-  console.log(req.user);
 
   const userId = req.user.id;
 
@@ -78,6 +78,10 @@ const getAllTasks = async (req) => {
     };
   });
 
+  if(isEmptyOrNull(responseData)) {
+    throw new NotFoundError("Data is not found")
+  }
+
   return responseData;
 };
 
@@ -117,6 +121,10 @@ const getTaskById = async (req) => {
       platformId: undefined,
     };
   });
+
+  if (isEmptyOrNull(responseData)) {
+    throw new NotFoundError("Task data not found")
+  }
 
   return responseData;
 };
@@ -158,6 +166,11 @@ const updateTaskById = async (req) => {
       runValidators: true,
     }
   );
+  
+  // check if result is empty or not
+  if(isEmptyOrNull(result)) {
+    throw new NotFoundError("Data not found")
+  }
 
   return result;
 };
@@ -172,6 +185,11 @@ const deleteTaskById = async (req) => {
   }
 
   const result = await Task.findOneAndDelete({ _id: id });
+
+  // check if result is empty or not
+  if(isEmptyOrNull(result)) {
+    throw new NotFoundError("Data not found")
+  }
 
   return result;
 };
