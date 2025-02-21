@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://https://socmed-content-management-api-production.up.railway.app/api/v1"
+      "url": "https://socmed-content-management-api-production.up.railway.app/api/v1"
     }
   ],
   "components": {
